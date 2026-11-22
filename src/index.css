@@ -58,31 +58,22 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   color: #29233d;
   text-decoration: none;
   font-family: Manrope, sans-serif;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.8px;
 }
 .brand-mark {
   display: grid;
-  width: 31px;
-  height: 31px;
+  width: 29px;
+  height: 29px;
   place-items: center;
   color: #fff;
   background: linear-gradient(145deg, #a68cec, #8062dc);
   border-radius: 10px;
   box-shadow: 0 4px 9px #8f74dc40;
 }
-.brand-light { font-weight: 500; color: #89839b; }
-.workspace-switcher {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 31px;
-  padding: 10px 9px;
-  border: 1px solid #f0eff4;
-  border-radius: 11px;
-}
-.workspace-avatar, .profile-avatar {
+.brand-light { font-weight: 600; color: #817b94; }
+.profile-avatar {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
@@ -90,11 +81,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   background: #eee8ff;
   font-weight: 700;
 }
-.workspace-avatar { width: 34px; height: 34px; border-radius: 9px; font-size: 14px; }
-.workspace-copy, .profile-copy { display: flex; min-width: 0; flex: 1; flex-direction: column; line-height: 1.4; }
-.workspace-copy strong, .profile-copy strong { font-size: 12px; font-weight: 700; color: #333044; }
-.workspace-copy span, .profile-copy span { margin-top: 2px; color: #9693a2; font-size: 10px; }
-.workspace-chevron { margin-top: -6px; color: #9290a0; font-size: 20px; }
 .nav-label {
   margin: 0 0 9px 10px;
   color: #aaa8b5;
@@ -131,33 +117,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   text-align: center;
   font-size: 10px;
 }
-.sidebar-bottom { margin-top: auto; }
-.upgrade-card {
-  margin: 0 1px 18px;
-  padding: 15px 13px 13px;
-  background: linear-gradient(145deg, #f8f5ff, #f7f5fb);
-  border: 1px solid #f1edf9;
-  border-radius: 12px;
-}
-.upgrade-icon {
-  display: grid;
-  width: 27px;
-  height: 27px;
-  margin-bottom: 10px;
-  place-items: center;
-  color: #795bce;
-  background: #ece5fd;
-  border-radius: 8px;
-}
-.upgrade-title { margin: 0 0 4px; font-size: 11px; font-weight: 700; }
-.upgrade-description { margin: 0; color: #858195; font-size: 10px; line-height: 1.55; }
-.week-progress { height: 4px; margin: 13px 0 6px; overflow: hidden; background: #e8e2f4; border-radius: 4px; }
-.week-progress span { display: block; width: 68%; height: 100%; background: #9c83e1; border-radius: inherit; }
-.week-progress-label { margin: 0; color: #9691a4; font-size: 9px; }
 .sidebar-secondary { min-height: 37px; font-size: 11px; }
-.profile-row { display: flex; align-items: center; gap: 9px; margin-top: 13px; padding: 15px 5px 0; border-top: 1px solid #f0eff3; }
 .profile-avatar { width: 31px; height: 31px; border-radius: 50%; font-size: 10px; }
-.profile-menu { color: #8b8999; font-size: 20px; letter-spacing: 1px; }
 
 .topbar {
   height: 66px;
@@ -168,7 +129,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   background: #fff;
   border-bottom: 1px solid #efeff3;
 }
-.topbar-date { margin: 0; color: #858395; font-size: 11px; }
+.breadcrumbs { display: flex; align-items: center; gap: 7px; color: #9693a2; font-size: 10px; }
+.breadcrumbs svg { color: #b7b4c1; }
+.breadcrumb-current { color: #333044; font-weight: 700; }
 .topbar-actions { display: flex; align-items: center; gap: 17px; }
 .button {
   display: inline-flex;
@@ -202,9 +165,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   cursor: pointer;
 }
 .icon-button:hover { color: #6247b8; background: #f6f3fc; }
-.notification-button { position: relative; }
-.notification-dot { position: absolute; top: 7px; right: 7px; width: 6px; height: 6px; background: #f18678; border: 1.5px solid white; border-radius: 50%; }
-.topbar-user { display: flex; align-items: center; gap: 7px; padding: 0; background: none; border: 0; cursor: pointer; }
+.topbar-user { display: flex; align-items: center; gap: 7px; color: #777487; }
 .topbar-avatar { width: 29px; height: 29px; font-size: 9px; }
 .mobile-menu-button { display: none; }
 
@@ -220,18 +181,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   font-weight: 700;
   letter-spacing: 1px;
 }
-.welcome-row h1 {
-  margin: 0;
-  color: #27243a;
-  font-family: Manrope, 'DM Sans', sans-serif;
-  font-size: clamp(24px, 2.4vw, 31px);
-  font-weight: 700;
-  letter-spacing: -1.1px;
-  line-height: 1.25;
-}
-.welcome-row h1 span { color: #a58de6; }
-.welcome-caption { margin: 6px 0 0; color: #9190a0; font-size: 11px; }
-.welcome-add { min-height: 40px; padding-inline: 17px; }
+
 
 .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
 .stat-card {
@@ -264,6 +214,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .mini-ring span { display: grid; width: 28px; height: 28px; place-items: center; color: #62a185; background: white; border-radius: 50%; font-size: 8px; font-weight: 700; }
 .stat-progress { height: 3px; margin-top: 9px; overflow: hidden; background: #edf4ef; border-radius: 4px; }
 .stat-progress span { display: block; height: 100%; background: #8bb9a6; border-radius: 4px; transition: width 180ms ease; }
+.welcome-row h1 {
+  margin: 0;
+  color: #27243a;
+  font-family: Manrope, 'DM Sans', sans-serif;
+  font-size: clamp(24px, 2.4vw, 31px);
+  font-weight: 700;
+  letter-spacing: -1.1px;
+  line-height: 1.25;
+}
+.welcome-caption { margin: 6px 0 0; color: #9190a0; font-size: 11px; }
+.welcome-add { min-height: 40px; padding-inline: 17px; }
 
 .focus-banner {
   position: relative;
@@ -503,6 +464,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .sidebar { width: 218px; flex-basis: 218px; }
   .topbar { padding-inline: 27px; }
   .dashboard-content { padding: 29px 27px 16px; }
+  .welcome-row { margin-bottom: 19px; }
   .stats-grid { gap: 10px; }
   .stat-card { padding-inline: 12px; }
   .work-area { grid-template-columns: minmax(0, 1fr); gap: 13px; }
@@ -516,13 +478,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .sidebar-backdrop { position: fixed; z-index: 11; inset: 0; display: block; background: #211a2d70; border: 0; }
   .mobile-menu-button { display: grid; margin-left: -6px; }
   .topbar { height: 58px; justify-content: flex-start; gap: 12px; padding-inline: 19px; }
-  .topbar-date { font-size: 10px; }
   .topbar-actions { gap: 9px; margin-left: auto; }
-  .topbar-add { min-height: 33px; padding-inline: 10px; font-size: 10px; }
-  .topbar-add svg { width: 15px; }
-  .notification-button { display: none; }
   .dashboard-content { padding: 27px 20px 15px; }
-  .welcome-row { margin-bottom: 19px; }
   .welcome-row h1 { font-size: 26px; }
   .welcome-caption { max-width: 290px; font-size: 10px; }
   .welcome-add { display: none; }
@@ -540,8 +497,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 460px) {
   .topbar { padding-inline: 13px; }
-  .topbar-date { max-width: 120px; white-space: nowrap; }
-  .topbar-user > svg { display: none; }
   .dashboard-content { padding: 23px 13px 12px; }
   .welcome-row h1 { font-size: 24px; }
   .welcome-row .eyebrow { font-size: 8px; }

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ArrowDownUp, Check, CircleCheck, CircleDashed, Clock3, Plus, Sparkles } from 'lucide-react'
+import { ArrowDownUp, Check, CircleCheck, CircleDashed, Clock3, Plus } from 'lucide-react'
 import Sidebar from './components/Sidebar.jsx'
 import Header from './components/Header.jsx'
 import StatCard from './components/StatCard.jsx'
@@ -109,16 +109,15 @@ function App() {
         taskCount={stats.total}
       />
       <main className="main-panel">
-        <Header onNewTask={openCreateForm} onMenuToggle={() => setIsSidebarOpen((open) => !open)} />
+        <Header currentPage={activeNav} onMenuToggle={() => setIsSidebarOpen((open) => !open)} />
         <div className="dashboard-content">
           {storageError && (
             <div className="storage-alert" role="status">{storageError}</div>
           )}
           <section className="welcome-row" aria-labelledby="welcome-title">
             <div>
-              <p className="eyebrow"><Sparkles size={14} aria-hidden="true" /> YOUR PERSONAL WORKSPACE</p>
-              <h1 id="welcome-title">{activeNav === 'Today' ? 'Today’s focus' : 'Good morning, Alex'}<span>.</span></h1>
-              <p className="welcome-caption">A little progress each day adds up to big results.</p>
+              <h1 id="welcome-title">Your work, in focus.</h1>
+              <p className="welcome-caption">Plan your day, stay organized, and celebrate small wins.</p>
             </div>
             <button className="button button-primary welcome-add" type="button" onClick={openCreateForm}>
               <Plus size={18} strokeWidth={2.2} aria-hidden="true" />

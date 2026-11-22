@@ -1,24 +1,19 @@
-import { ChevronDown, Menu, Plus } from 'lucide-react'
+import { ChevronDown, ChevronRight, Menu } from 'lucide-react'
 
-function Header({ onNewTask, onMenuToggle }) {
-  const today = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  })
-
+function Header({ currentPage, onMenuToggle }) {
   return (
     <header className="topbar">
       <button className="icon-button mobile-menu-button" type="button" aria-label="Open navigation menu" onClick={onMenuToggle}>
         <Menu size={20} aria-hidden="true" />
       </button>
-      <p className="topbar-date">{today}</p>
+      <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <span>Workspace</span>
+        <ChevronRight size={13} aria-hidden="true" />
+        <span className="breadcrumb-current" aria-current="page">{currentPage}</span>
+      </nav>
       <div className="topbar-actions">
-        <button className="button button-primary topbar-add" type="button" onClick={onNewTask}>
-          <Plus size={17} aria-hidden="true" /><span>New task</span>
-        </button>
-        <div className="topbar-user" aria-label="Signed in as Alex Lane">
-          <span className="profile-avatar topbar-avatar" aria-hidden="true">AL</span>
+        <div className="topbar-user" role="img" aria-label="User profile: JD">
+          <span className="profile-avatar topbar-avatar" aria-hidden="true">JD</span>
           <ChevronDown size={15} aria-hidden="true" />
         </div>
       </div>
