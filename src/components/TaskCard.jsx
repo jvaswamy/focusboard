@@ -51,27 +51,27 @@ function TaskCard({ task, onEdit, onDelete, onStatusChange }) {
           <span />{task.priority}
         </span>
         <span className="task-due"><CalendarDays size={13} aria-hidden="true" />{formatDueDate(task.dueDate)}</span>
-      <div className="task-menu-wrap">
-        <button
-          type="button"
-          className="icon-button task-menu-trigger"
-          aria-label={`Actions for ${task.title}`}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <MoreHorizontal size={19} aria-hidden="true" />
-        </button>
-        {menuOpen && (
-          <div className="task-menu">
-            <button type="button" onClick={() => { onEdit(task); setMenuOpen(false) }}>
-              <Pencil size={14} aria-hidden="true" /> Edit task
-            </button>
-            <button type="button" className="delete-action" onClick={() => { onDelete(task); setMenuOpen(false) }}>
-              <Trash2 size={14} aria-hidden="true" /> Delete task
-            </button>
-          </div>
-        )}
-      </div>
+        <div className="task-menu-wrap">
+          <button
+            type="button"
+            className="icon-button task-menu-trigger"
+            aria-label={`Actions for ${task.title}`}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <MoreHorizontal size={19} aria-hidden="true" />
+          </button>
+          {menuOpen && (
+            <div className="task-menu">
+              <button type="button" onClick={() => { onEdit(task); setMenuOpen(false) }}>
+                <Pencil size={14} aria-hidden="true" /> Edit task
+              </button>
+              <button type="button" className="delete-action" onClick={() => { onDelete(task); setMenuOpen(false) }}>
+                <Trash2 size={14} aria-hidden="true" /> Delete task
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </article>
   )

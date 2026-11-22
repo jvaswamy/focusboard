@@ -1,12 +1,13 @@
-import { CalendarDays, CheckSquare2, LayoutDashboard, LayoutGrid } from 'lucide-react'
+import { CalendarDays, LayoutGrid, List, Settings2 } from 'lucide-react'
 
 const navigation = [
-  { label: 'Overview', icon: LayoutDashboard },
-  { label: 'Today', icon: CalendarDays },
-  { label: 'All tasks', icon: CheckSquare2 },
+  { label: 'Overview', icon: LayoutGrid },
+  { label: 'My tasks', icon: List },
+  { label: 'Calendar', icon: CalendarDays },
+  { label: 'Settings', icon: Settings2 },
 ]
 
-function Sidebar({ activeItem, isOpen, onNavigate, taskCount }) {
+function Sidebar({ activeItem, isOpen, onNavigate }) {
   return (
     <aside className={`sidebar${isOpen ? ' sidebar-open' : ''}`} aria-label="Main navigation">
       <a className="brand" href="#dashboard" onClick={(event) => { event.preventDefault(); onNavigate('Overview') }}>
@@ -25,7 +26,6 @@ function Sidebar({ activeItem, isOpen, onNavigate, taskCount }) {
           >
             <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
             <span>{label}</span>
-            {label === 'All tasks' && <span className="nav-count">{taskCount}</span>}
           </button>
         ))}
       </nav>

@@ -20,7 +20,7 @@ function TaskForm({ task, onSave, onClose }) {
 
   useEffect(() => {
     titleRef.current?.focus()
-  }, [onClose])
+  }, [])
 
   function handleDialogKeyDown(event) {
     if (event.key === 'Escape') {

@@ -31,7 +31,7 @@ function SearchBar({ value, onChange }) {
           <X size={15} aria-hidden="true" />
         </button>
       )}
-      {!value && <kbd aria-hidden="true">⌘ K</kbd>}
+      {!value && <kbd aria-hidden="true">Ctrl/⌘ K</kbd>}
     </label>
   )
 }

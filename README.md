@@ -15,7 +15,7 @@ Open the local URL printed by Vite. To create a production build, run `npm run b
 
 - Create, edit, complete, reprioritize, and delete tasks.
 - Search by task title and filter by status or priority.
-- Live task totals, in-progress and completed counts, and completion percentage.
+- Live task totals, in-progress and completed counts.
 - Three Focus Notes with previous, next, and direct slide controls.
 - Responsive sidebar navigation and layouts for mobile, tablet, and desktop.
 - Keyboard-accessible controls, visible focus styles, and reduced-motion support.

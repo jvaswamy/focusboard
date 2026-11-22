@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ArrowDownUp, Check, CircleCheck, CircleDashed, Clock3, Plus } from 'lucide-react'
+import { ArrowDownUp, CircleCheck, CircleDashed, Clock3, Plus } from 'lucide-react'
 import Sidebar from './components/Sidebar.jsx'
 import Header from './components/Header.jsx'
 import StatCard from './components/StatCard.jsx'
@@ -30,13 +30,14 @@ function App() {
 
   const stats = useMemo(() => {
     const total = tasks.length
+    const toDo = tasks.filter((task) => task.status === 'To do').length
     const inProgress = tasks.filter((task) => task.status === 'In progress').length
     const completed = tasks.filter((task) => task.status === 'Completed').length
     return {
       total,
+      toDo,
       inProgress,
       completed,
-      completion: total ? Math.round((completed / total) * 100) : 0,
     }
   }, [tasks])
 
@@ -46,7 +47,7 @@ function App() {
       const matchesSearch = !query || task.title.toLowerCase().includes(query)
       const matchesStatus = statusFilter === 'All tasks' || task.status === statusFilter
       const matchesPriority = priorityFilter === 'All priorities' || task.priority === priorityFilter
-      const matchesNav = activeNav !== 'Today' || task.dueDate === getLocalDateString()
+      const matchesNav = activeNav !== 'Calendar' || task.dueDate === getLocalDateString()
       return matchesSearch && matchesStatus && matchesPriority && matchesNav
     })
   }, [activeNav, priorityFilter, search, statusFilter, tasks])
@@ -106,7 +107,6 @@ function App() {
         activeItem={activeNav}
         isOpen={isSidebarOpen}
         onNavigate={navigateTo}
-        taskCount={stats.total}
       />
       <main className="main-panel">
         <Header currentPage={activeNav} onMenuToggle={() => setIsSidebarOpen((open) => !open)} />
@@ -116,7 +116,7 @@ function App() {
           )}
           <section className="welcome-row" aria-labelledby="welcome-title">
             <div>
-              <h1 id="welcome-title">Your work, in focus.</h1>
+              <h1 id="welcome-title">{activeNav === 'Calendar' ? 'Today’s focus' : 'Your work, in focus.'}</h1>
               <p className="welcome-caption">Plan your day, stay organized, and celebrate small wins.</p>
             </div>
             <button className="button button-primary welcome-add" type="button" onClick={openCreateForm}>
@@ -149,63 +149,53 @@ function App() {
               icon={CircleCheck}
               tone="mint"
             />
-            <StatCard
-              label="Completion"
-              value={`${stats.completion}%`}
-              detail="You’re making great progress"
-              icon={Check}
-              tone="blue"
-              progress={stats.completion}
-            />
           </section>
 
-          <section className="work-area" aria-label="Tasks">
-            <div className="tasks-panel">
-              <div className="section-heading">
-                <div>
-                  <div className="heading-with-icon">
-                    <CircleDashed size={19} aria-hidden="true" />
-                    <h2>My tasks</h2>
-                  </div>
-                  <p className="section-subtitle">Make space for what matters.</p>
+          <section className="tasks-panel" aria-label="Tasks">
+            <div className="section-heading">
+              <div>
+                <div className="heading-with-icon">
+                  <CircleDashed size={19} aria-hidden="true" />
+                  <h2>My tasks</h2>
                 </div>
-                <button className="button button-quiet add-task-small" type="button" onClick={openCreateForm}>
-                  <Plus size={16} aria-hidden="true" /> Add task
-                </button>
+                <p className="section-subtitle">Make space for what matters.</p>
               </div>
-              <div className="task-tools">
-                <SearchBar value={search} onChange={setSearch} />
-                <label className="priority-filter">
-                  <span className="sr-only">Filter by priority</span>
-                  <select value={priorityFilter} onChange={(event) => setPriorityFilter(event.target.value)}>
-                    <option>All priorities</option>
-                    <option>High</option>
-                    <option>Medium</option>
-                    <option>Low</option>
-                  </select>
-                </label>
-              </div>
-              <FilterTabs
-                value={statusFilter}
-                onChange={setStatusFilter}
-                counts={{
-                  'All tasks': stats.total,
-                  'To do': tasks.filter((task) => task.status === 'To do').length,
-                  'In progress': stats.inProgress,
-                  Completed: stats.completed,
-                }}
-              />
-              <TaskList
-                tasks={visibleTasks}
-                onEdit={(task) => {
-                  setEditingTask(task)
-                  setIsFormOpen(true)
-                }}
-                onDelete={deleteTask}
-                onStatusChange={updateStatus}
-                onCreate={openCreateForm}
-              />
+              <button className="button button-quiet add-task-small" type="button" onClick={openCreateForm}>
+                <Plus size={16} aria-hidden="true" /> Add task
+              </button>
             </div>
+            <div className="task-tools">
+              <SearchBar value={search} onChange={setSearch} />
+              <label className="priority-filter">
+                <span className="sr-only">Filter by priority</span>
+                <select value={priorityFilter} onChange={(event) => setPriorityFilter(event.target.value)}>
+                  <option>All priorities</option>
+                  <option>High</option>
+                  <option>Medium</option>
+                  <option>Low</option>
+                </select>
+              </label>
+            </div>
+            <FilterTabs
+              value={statusFilter}
+              onChange={setStatusFilter}
+              counts={{
+                'All tasks': stats.total,
+                'To do': stats.toDo,
+                'In progress': stats.inProgress,
+                Completed: stats.completed,
+              }}
+            />
+            <TaskList
+              tasks={visibleTasks}
+              onEdit={(task) => {
+                setEditingTask(task)
+                setIsFormOpen(true)
+              }}
+              onDelete={deleteTask}
+              onStatusChange={updateStatus}
+              onCreate={openCreateForm}
+            />
           </section>
           <footer className="app-footer">Made for your best work, one day at a time <span aria-hidden="true">✦</span></footer>
         </div>
