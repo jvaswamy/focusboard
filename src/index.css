@@ -354,17 +354,27 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .filter-tab-active::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; content: ''; background: #8b6ed9; border-radius: 2px 2px 0 0; }
 .filter-count { color: #aaa8b4; font-size: 9px; }
 .filter-tab-active .filter-count { color: #876dd0; }
-.task-list { display: grid; margin: 0; padding: 0; list-style: none; }
-.task-list li + li { border-top: 1px solid #f2f1f5; }
-.task-card { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 14px 0 13px; }
-.task-check { display: grid; width: 20px; height: 22px; flex: 0 0 auto; place-items: center; padding: 0; color: #c5c2ce; background: transparent; border: 0; border-radius: 50%; cursor: pointer; }
+.task-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.task-list li { min-width: 0; }
+.task-card {
+  position: relative;
+  display: flex;
+  min-height: 59px;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  background: #fff;
+  border: 1px solid #ececf2;
+  border-radius: 11px;
+}
+.task-check { display: grid; width: 26px; height: 26px; flex: 0 0 auto; place-items: center; padding: 0; background: #f2efff; border: 0; border-radius: 8px; cursor: pointer; }
 .task-check:hover { color: #8d72d7; }
-.task-check-done { color: #7ab59b; }
+.task-checkbox-box { display: grid; width: 12px; height: 12px; place-items: center; color: transparent; border: 1.5px solid #8a70e6; border-radius: 4px; }
+.task-check-done .task-checkbox-box { color: white; background: #78ae94; border-color: #78ae94; }
 .task-main { min-width: 0; flex: 1; }
-.task-title-row { display: flex; align-items: center; gap: 8px; }
-.task-title-row h3 { overflow: hidden; margin: 1px 0 0; color: #373447; font-size: 11px; font-weight: 600; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
-.task-completed .task-title-row h3 { color: #9e9baa; text-decoration: line-through; text-decoration-color: #c6c3cf; }
-.priority-badge { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 4px; padding: 3px 6px; border-radius: 5px; font-size: 8px; line-height: 1; }
+.task-main h3 { overflow: hidden; margin: 0; color: #29283e; font-size: 11px; font-weight: 700; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.task-completed .task-main h3 { color: #9e9baa; }
+.priority-badge { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 14px; font-size: 9px; line-height: 1; }
 .priority-badge > span { width: 5px; height: 5px; border-radius: 50%; }
 .priority-high { color: #cd7977; background: #fff2f0; }
 .priority-high > span { background: #e28d83; }
@@ -372,29 +382,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .priority-medium > span { background: #e3b960; }
 .priority-low { color: #69a188; background: #eff8f2; }
 .priority-low > span { background: #82b99d; }
-.task-description { overflow: hidden; margin: 3px 0 0; color: #a19fac; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
-.task-meta { display: flex; align-items: center; gap: 9px; margin-top: 8px; }
-.category-tag { overflow: hidden; max-width: 86px; padding: 3px 6px; border-radius: 4px; color: #8c79bc; background: #f4f0fb; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.task-description { display: flex; overflow: hidden; margin: 3px 0 0; color: #88899d; font-size: 9px; white-space: nowrap; }
+.task-description > span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.task-due-hint { flex: 0 0 auto; color: #9b9bae; }
+.task-trailing { display: flex; flex: 0 0 auto; align-items: center; gap: 9px; }
+.category-tag { overflow: hidden; max-width: 100px; padding: 5px 11px; border-radius: 14px; color: #7658dc; background: #f2efff; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
 .category-marketing { color: #be8d6a; background: #fff4ea; }
 .category-admin { color: #7394bc; background: #eef4fa; }
 .category-product { color: #8b81bb; background: #f1effa; }
 .category-planning { color: #659c8e; background: #edf7f3; }
 .category-personal { color: #ae7f98; background: #fbf0f5; }
-.task-due { display: inline-flex; align-items: center; gap: 4px; color: #a09eac; font-size: 8px; white-space: nowrap; }
-.status-select-label { position: relative; }
-.status-select {
-  max-width: 96px;
-  padding: 3px 16px 3px 6px;
-  color: #858196;
-  background: #f5f4f8;
-  border: 0;
-  border-radius: 4px;
-  font-size: 8px;
-  cursor: pointer;
-}
-.status-in-progress { color: #b2894f; background: #fff8e9; }
-.status-completed { color: #62a087; background: #eff8f2; }
-.task-menu-wrap { position: relative; margin: -4px -4px 0 0; }
+.task-due { display: inline-flex; align-items: center; gap: 4px; color: #777b91; font-size: 9px; white-space: nowrap; }
+.task-menu-wrap { position: relative; }
 .task-menu-trigger { width: 27px; height: 27px; }
 .task-menu {
   position: absolute;
@@ -513,12 +512,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .filter-tabs { justify-content: space-between; gap: 5px; }
   .filter-tab { gap: 3px; font-size: 9px; }
   .filter-count { font-size: 8px; }
-  .task-card { gap: 7px; }
-  .task-title-row { flex-wrap: wrap; gap: 5px; }
-  .task-title-row h3 { max-width: 100%; font-size: 10px; }
-  .task-description { max-width: 245px; }
-  .task-meta { flex-wrap: wrap; gap: 6px; }
-  .task-menu-wrap { margin-right: -6px; }
+  .task-card { flex-wrap: wrap; gap: 7px 8px; padding: 10px; }
+  .task-check { width: 23px; height: 23px; }
+  .task-main { width: calc(100% - 31px); flex: 0 0 calc(100% - 31px); }
+  .task-main h3 { font-size: 10px; }
+  .task-trailing { width: calc(100% - 31px); flex: 0 0 calc(100% - 31px); justify-content: space-between; gap: 5px; margin-left: 31px; }
+  .category-tag { max-width: 85px; padding-inline: 8px; font-size: 8px; }
+  .priority-badge { padding-inline: 8px; font-size: 8px; }
+  .task-due { font-size: 8px; }
   .focus-copy h2 { font-size: 18px; }
   .focus-description { font-size: 8px; }
   .focus-side { gap: 9px; }

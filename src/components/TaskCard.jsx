@@ -1,10 +1,24 @@
-import { CalendarDays, CircleCheck, Circle, MoreHorizontal, Pencil, Trash2 } from 'lucide-react'
+import { CalendarDays, Check, MoreHorizontal, Pencil, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 
 function formatDueDate(value) {
   if (!value) return 'No due date'
   const [year, month, day] = value.split('-').map(Number)
   return new Date(year, month - 1, day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
+function getDueHint(value, isCompleted) {
+  if (isCompleted) return 'Completed'
+  if (!value) return 'No due date'
+  const [year, month, day] = value.split('-').map(Number)
+  const due = new Date(year, month - 1, day)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const daysUntilDue = Math.round((due - today) / 86_400_000)
+  if (daysUntilDue < 0) return 'Overdue'
+  if (daysUntilDue === 0) return 'Due today'
+  if (daysUntilDue <= 3) return 'Due soon'
+  return 'Upcoming'
 }
 
 function TaskCard({ task, onEdit, onDelete, onStatusChange }) {
@@ -16,36 +30,27 @@ function TaskCard({ task, onEdit, onDelete, onStatusChange }) {
       <button
         type="button"
         className={`task-check${isCompleted ? ' task-check-done' : ''}`}
+        aria-pressed={isCompleted}
         aria-label={isCompleted ? `Mark ${task.title} as to do` : `Mark ${task.title} as completed`}
         onClick={() => onStatusChange(task.id, isCompleted ? 'To do' : 'Completed')}
       >
-        {isCompleted ? <CircleCheck size={20} aria-hidden="true" /> : <Circle size={20} aria-hidden="true" />}
+        <span className="task-checkbox-box">
+          {isCompleted && <Check size={13} strokeWidth={2.5} aria-hidden="true" />}
+        </span>
       </button>
       <div className="task-main">
-        <div className="task-title-row">
-          <h3>{task.title}</h3>
-          <span className={`priority-badge priority-${task.priority.toLowerCase()}`}>
-            <span />{task.priority}
-          </span>
-        </div>
-        {task.description && <p className="task-description">{task.description}</p>}
-        <div className="task-meta">
-          <span className={`category-tag category-${task.category.toLowerCase()}`}>{task.category}</span>
-          <span className="task-due"><CalendarDays size={13} aria-hidden="true" />{formatDueDate(task.dueDate)}</span>
-          <label className="status-select-label">
-            <span className="sr-only">Status for {task.title}</span>
-            <select
-              className={`status-select status-${task.status.toLowerCase().replace(' ', '-')}`}
-              value={task.status}
-              onChange={(event) => onStatusChange(task.id, event.target.value)}
-            >
-              <option>To do</option>
-              <option>In progress</option>
-              <option>Completed</option>
-            </select>
-          </label>
-        </div>
+        <h3>{task.title}</h3>
+        <p className="task-description">
+          <span>{task.description || task.category}</span>
+          <span className="task-due-hint"> · {getDueHint(task.dueDate, isCompleted)}</span>
+        </p>
       </div>
+      <div className="task-trailing">
+        <span className={`category-tag category-${task.category.toLowerCase()}`}>{task.category}</span>
+        <span className={`priority-badge priority-${task.priority.toLowerCase()}`}>
+          <span />{task.priority}
+        </span>
+        <span className="task-due"><CalendarDays size={13} aria-hidden="true" />{formatDueDate(task.dueDate)}</span>
       <div className="task-menu-wrap">
         <button
           type="button"
@@ -66,6 +71,7 @@ function TaskCard({ task, onEdit, onDelete, onStatusChange }) {
             </button>
           </div>
         )}
+      </div>
       </div>
     </article>
   )
